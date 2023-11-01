@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Tool Bean -->
+    <bean id="tool" class="org.example.beans.Tool">
+        <constructor-arg value="${tool.name}" />
+    </bean>
+
+    <!-- Mechanic Bean -->
+    <bean id="mechanic" class="org.example.beans.Mechanic">
+        <constructor-arg value="${mechanic.name}" />
+        <property name="tool" ref="tool" />
+    </bean>
+
+    <!-- Garage Bean -->
+    <bean id="garage" class="org.example.beans.Garage">
+        <constructor-arg ref="mechanic" />
+    </bean>
+
+    <!-- Properties -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:garage.properties" />
+    </bean>
+</beans>
