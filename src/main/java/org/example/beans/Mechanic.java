@@ -1,19 +1,66 @@
 package org.example.beans;
 
-public class Mechanic {
-    private String name;
-    private Tool tool;
+import javax.persistence.*;
 
-    public Mechanic(String name) {
+@Entity
+public class Mechanic {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String tool;
+
+    @ManyToOne
+    @JoinColumn(name = "garage_id")
+    private Garage garage;
+
+    public Mechanic() {
+    }
+
+    public Mechanic(String name, String tool) {
+        this.name = name;
+        this.tool = tool;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setTool(Tool tool) {
+    public String getTool() {
+        return tool;
+    }
+
+    public void setTool(String tool) {
         this.tool = tool;
+    }
+
+    public Garage getGarage() {
+        return garage;
+    }
+
+    public void setGarage(Garage garage) {
+        this.garage = garage;
     }
 
     @Override
     public String toString() {
-        return "Mechanic [name=" + name + ", tool=" + tool + "]";
+        return "Mechanic{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", tool='" + tool + '\'' +
+                '}';
     }
 }

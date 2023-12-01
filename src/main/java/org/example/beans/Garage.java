@@ -1,14 +1,23 @@
 package org.example.beans;
 
+        import org.springframework.stereotype.Component;
+
+        import javax.persistence.*;
+
+@Component
+@Entity
 public class Garage {
-    private Mechanic mechanic;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Garage(Mechanic mechanic) {
-        this.mechanic = mechanic;
+    @OneToOne(mappedBy = "garage", fetch = FetchType.LAZY)
+    private Tool tool;
+
+    public Garage() {
     }
 
-    @Override
-    public String toString() {
-        return "Garage [mechanic=" + mechanic + "]";
+    public void someGarageMethod() {
     }
+
 }
